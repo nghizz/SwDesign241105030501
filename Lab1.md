@@ -18,24 +18,36 @@ Kiến trúc 3 lớp là một kiến trúc phần mềm phổ biến và linh h
 - **Biểu đồ Package:**
   ![Diagram](https://www.planttext.com/api/plantuml/png/P59BRW8n3DtFAI9MxOOZL9JI1HAeemeEu7eCfEGpjPDAeugJTT4ZzGfDWCbqX9VlsNxlEVdz_fb900xHcge5FCAUrAHc4d81WlPEhQ0ZdgYlIYaq8AAsGhnqWNW7I6SyLwEbDT1jbtVtL-G0hZ5KkW7pkZDxgaxLe3QFeXsbnIk_rtYhr_CNkjT3C1WD1AgXOszCaGr9wRZHbWfYmIMXPziQtn59mSkA9s-j5kdjvIAtyupKQxz6SnqSUrz0W5l76Nr4p9cANUySOTZupBs13Eu-8d5NitzFzFhirARRB-QbGOBduZwF5uOfiAPFocaHk1cHbzHrP3makHTkYFyb63_YTFemFdCrFdhcXr3LZ5oJFimV0000__y30000)
 
-
 # 2. Cơ chế phân tích
 
-Để giải quyết bài toán này, tôi sẽ đề xuất một số cơ chế phân tích phù hợp cùng với lý giải:
+Để phát triển một Payroll System toàn diện, các cơ chế phân tích sau đây được đề xuất nhằm đáp ứng đầy đủ các yêu cầu nghiệp vụ và kỹ thuật:
 
-1. **Phân tích nhu cầu và yêu cầu**: Hiểu rõ mục tiêu, phạm vi và ràng buộc của bài toán là điều cực kỳ quan trọng. Cần xác định rõ các yêu cầu chức năng và phi chức năng, đối tượng sử dụng, môi trường triển khai và các yếu tố liên quan khác.
+### 1. Persistency (Lưu trữ dữ liệu)
+   - **Lý do**: Hệ thống cần lưu trữ thông tin nhân viên, thời gian làm việc, phương thức thanh toán và các chi tiết liên quan đến thanh toán. Đảm bảo tính liên tục của dữ liệu giúp tránh mất mát thông tin quan trọng và cho phép truy xuất khi cần thiết.
 
-2. **Phân tích dữ liệu đầu vào và đầu ra**: Xác định rõ cấu trúc, định dạng và nguồn của dữ liệu đầu vào. Đồng thời, cần xác định cấu trúc và định dạng của dữ liệu đầu ra mong muốn. Điều này giúp xác định các bước xử lý dữ liệu cần thiết.
+### 2. Security (Bảo mật)
+   - **Lý do**: Payroll System chứa các thông tin nhạy cảm như dữ liệu cá nhân, mức lương và thông tin thanh toán của nhân viên. Cần có cơ chế bảo mật để bảo vệ dữ liệu khỏi truy cập trái phép, đảm bảo chỉ người có thẩm quyền mới được phép truy cập và thao tác với hệ thống.
 
-3. **Phân tích quy trình nghiệp vụ**: Nếu bài toán liên quan đến quy trình nghiệp vụ, cần phân tích và mô hình hóa các bước, luồng công việc và quy trình liên quan để hiểu rõ logic nghiệp vụ.
+### 3. Transaction Management (Quản lý giao dịch)
+   - **Lý do**: Do hệ thống thực hiện các giao dịch tài chính như tính toán lương và xử lý thanh toán, cần có cơ chế quản lý giao dịch để đảm bảo các giao dịch này thực hiện hoàn chỉnh và không gây ra dữ liệu không nhất quán.
 
-4. **Phân tích kiến trúc và thiết kế hệ thống**: Xác định kiến trúc phần mềm phù hợp với yêu cầu bài toán, bao gồm các thành phần, mô-đun, giao diện và mối quan hệ giữa chúng. Đồng thời, xác định mô hình thiết kế chi tiết cho từng thành phần.
+### 4. Error Detection and Handling (Phát hiện và xử lý lỗi)
+   - **Lý do**: Hệ thống cần có khả năng phát hiện và xử lý lỗi kịp thời, chẳng hạn khi có vấn đề xảy ra trong quá trình giao dịch hoặc nhập liệu. Điều này giúp hệ thống luôn hoạt động ổn định và dễ bảo trì.
 
-5. **Phân tích hiệu suất và tối ưu hóa**: Nếu bài toán đòi hỏi hiệu suất cao hoặc tối ưu hóa tài nguyên, cần phân tích các yếu tố ảnh hưởng và đề xuất các giải pháp tối ưu hóa phù hợp.
+### 5. Process Control and Synchronization (Kiểm soát và đồng bộ hóa tiến trình)
+   - **Lý do**: Trong trường hợp nhiều người dùng truy cập đồng thời (nhân viên nhập thời gian làm việc, bộ phận tài chính xử lý lương), cần có cơ chế đồng bộ hóa để tránh xung đột dữ liệu, đảm bảo dữ liệu luôn nhất quán.
 
-6. **Phân tích rủi ro và đảm bảo chất lượng**: Xác định các rủi ro tiềm ẩn và đề xuất các biện pháp giảm thiểu rủi ro. Đồng thời, xác định các yêu cầu và quy trình đảm bảo chất lượng phù hợp.
+### 6. Communication (Giao tiếp giữa các thành phần)
+   - **Lý do**: Payroll System cần kết nối với hệ thống ngân hàng để thực hiện thanh toán và truy xuất dữ liệu từ hệ thống quản lý dự án cũ. Do đó, cần cơ chế giao tiếp giữa các hệ thống để truyền và nhận dữ liệu mượt mà.
 
-7. **Phân tích an toàn và bảo mật**: Nếu bài toán liên quan đến xử lý dữ liệu nhạy cảm hoặc yêu cầu an toàn cao, cần phân tích các mối đe dọa an toàn và bảo mật, đề xuất các biện pháp kiểm soát và bảo vệ phù hợp.
+### 7. Legacy Interface (Giao tiếp với hệ thống cũ)
+   - **Lý do**: Payroll System cần tích hợp với cơ sở dữ liệu của hệ thống cũ (Project Management Database) mà không làm thay đổi cấu trúc của hệ thống đó. Điều này đòi hỏi cơ chế giao tiếp với hệ thống cũ để lấy dữ liệu cần thiết mà không gián đoạn hoạt động hiện tại.
+
+### 8. Distribution (Phân phối)
+   - **Lý do**: Payroll System sẽ được triển khai trên các thiết bị cá nhân để nhân viên có thể nhập giờ làm việc và chọn phương thức thanh toán. Việc này đảm bảo mọi nhân viên đều có quyền truy cập, sử dụng hệ thống và dữ liệu được xử lý tập trung.
+
+Các cơ chế trên đảm bảo hệ thống Payroll đáp ứng yêu cầu về bảo mật, hiệu suất, tính liên tục, và khả năng mở rộng. Đây là nền tảng để triển khai và vận hành hệ thống hiệu quả, mang lại trải nghiệm người dùng tối ưu.
+
 
 # 3. Phân tích ca sử dụng Select Payment
 
